@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Classificação de Processos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+        }
+
+        #sidebar {
+            width: 280px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        #sidebar h3 {
+            margin-top: 0;
+            color: #f0ad4e; /* Kalinka color for branding */
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: background-color 0.3s;
+        }
+
+        #sidebar ul li a:hover, #sidebar ul li a.active {
+            background-color: #555;
+            padding-left: 5px; /* Indent on hover/active */
+        }
+
+        #main-content {
+            margin-left: 300px; /* Width of sidebar + some padding */
+            padding: 20px;
+            width: calc(100% - 300px);
+        }
+
+        header {
+            background: #fff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        #search-container {
+            margin-bottom: 20px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        
+        h2 {
+            border-bottom: 2px solid #f0ad4e; /* Kalinka color */
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #777;
+            font-style: italic;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .kalinka-highlight {
+            background-color: #f0ad4e; /* Kalinka color */
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .obs, .atencao {
+            background-color: #fcf8e3;
+            border-left: 4px solid #f0ad4e;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .atencao {
+            border-left-color: #d9534f; /* Red for strong attention */
+            background-color: #f2dede;
+        }
+
+        .competencia-item {
+            background-color: #e7f3fe;
+            border: 1px solid #b3d8ff;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+        }
+
+        /* For search highlighting */
+        .highlight-search {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        
+        /* Collapsible sections */
+        .collapsible {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            margin-top: 10px;
+            margin-bottom: 0;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            display: none; /* Hidden by default */
+            overflow: hidden;
+            background-color: white;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 3px 3px;
+        }
+        .collapsible-content ul, .collapsible-content p {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .collapsible.active:after {
+            content: "\2212"; /* Minus sign */
+        }
+
+        .collapsible:not(.active):after {
+            content: '\002B'; /* Plus sign */
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow-y: visible;
+            }
+            #main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav id="sidebar">
+        <h3>Navegação Rápida</h3>
+        <input type="text" id="nav-filter" placeholder="Filtrar navegação..." style="width: calc(100% - 22px); margin-bottom: 10px; padding: 8px;">
+        <ul id="nav-list">
+            <li><a href="#analises-preliminares">Análises Preliminares</a></li>
+            <li><a href="#pp-estatutaria">PP (Estatutária)</a></li>
+            <li><a href="#pprev-previdencia">PPREV (Previdência/IPÊ-Saúde)</a></li>
+            <li><a href="#pdpe-pi-dominio-publico">PDPE/PI (Domínio Público)</a></li>
+            <li><a href="#psaude">PSAUDE (Saúde)</a></li>
+            <li><a href="#pf-pi-tributaria">PF/PI (Tributária)</a></li>
+            <li><a href="#pdpa-pi-disciplinar">PDPA/PI (Disciplinar)</a></li>
+            <li><a href="#ppj-pi-passivos">PPJ ou PI (Passivos Judiciais)</a></li>
+            <li><a href="#competencia-procuradorias">Competência das Procuradorias</a></li>
+            <li><a href="#orientacoes-cumprimento-sentenca">Cumprimento de Sentença</a></li>
+            <li><a href="#incluir-tese">Processos com Tese</a></li>
+            <li><a href="#cadastro-embargos">Cadastro de Embargos</a></li>
+            <li><a href="#cadastro-partes">Cadastramento de Partes</a></li>
+            <li><a href="#escolher-fase">Escolher Fase</a></li>
+            <li><a href="#atuacoes-civeis">Atuações Cíveis</a></li>
+            <li><a href="#trabalhista">Trabalhista</a></li>
+            <li><a href="#execucoes-fiscais-bd1">Execuções Fiscais (BD-1)</a></li>
+            <li><a href="#proa">PROA</a></li>
+            <li><a href="#virtualizacao-migracao">Virtualização/Migração</a></li>
+            <li><a href="#ant">Arrecadação Não Tributária (ANT)</a></li>
+            <li><a href="#arrecadacao-x-defesa-tributaria">Arrecadação x Defesa Tributária</a></li>
+            <li><a href="#varas-especializadas">Varas Especializadas</a></li>
+            <li><a href="#estado-interessado">Estado como Parte Interessada</a></li>
+            <li><a href="#questoes-diversas">Questões Diversas</a></li>
+        </ul>
+    </nav>
+
+    <div id="main-content">
+        <header>
+            <h1>Guia de Classificação e Encaminhamento de Processos</h1>
+        </header>
+
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Buscar em todo o conteúdo...">
+        </div>
+
+        <section id="analises-preliminares">
+            <h2>Análises Preliminares</h2>
+            <p>Caso identifique um dos casos abaixo, encaminhar a atuação para <span class="kalinka-highlight">Kalinka</span> sem alterar cadastro:</p>
+            <ul>
+                <li>Natureza Execução Fiscal</li>
+                <li>Classe Precatórias e Rogatórias</li>
+                <li>ADIN de 2º Grau</li>
+                <li>Falência, Recuperação Judicial ou Insolvência Civil (pedidos de habilitação de créditos/incidentes de classificação de crédito, relacionados a esses tipos de processos NÃO devem ser encaminhados à Chefia e devem ser cadastrados conforme cada caso).</li>
+                <li>Virtualização/Migração cujo processo de origem possua cadastro no CPJ</li>
+                <li>Processos cíveis que tenham a FASE ou a FPE como parte (obs.: os processos trabalhistas devem ser cadastrados normalmente, sejam reclamatória, recurso ou precatório)</li>
+            </ul>
+            
+            <h3>Casos que precisam de mais atenção:</h3>
+            <ul>
+                <li>PP x PPREV.</li>
+                <li>Arrecadação Tributária x Defesa Tributária.</li>
+                <li>Execução fiscal ajuizada em Porto Alegre e processos derivados (embargos, cumprimento de sentença...). Competência pode ser da PI (inicial do interior), PF (inicial da PF) ou PDPE (inicial da PDPE).</li>
+                <li>Vara: Núcleo de Justiça 4.0 - Enchentes 2024 - Fazenda Pública. A Comarca será sempre Porto Alegre, então tem que verificar o final do número do processo para determinar se a competência é da PI ou da PDPE.</li>
+            </ul>
+        </section>
+
+        <section id="pp-estatutaria">
+            <h2>PP (área estatutária)</h2>
+            <p class="atencao"><strong>Atenção:</strong> no caso de processos eletrônicos, o cadastro tanto de processos do interior quanto de Porto Alegre deverá ser feito como PP. Os processos físicos que se enquadrem nesta categoria seguem sendo diferenciados entre interior (PI) e Porto Alegre (PP).</p>
+            
+            <button type="button" class="collapsible">Ordinária > Instrutória > Estatutária</button>
+            <div class="collapsible-content">
+                <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
+                <ul>
+                    <li>Questões envolvendo prova/etapas de concurso público</li>
+                    <li>Nomeação em concurso público</li>
+                    <li>Remoção (tanto solicitação quanto cancelamento)</li>
+                    <li>Desvio de função</li>
+                    <li>Pedido para fazer curso do trabalho (ex: bombeiros)</li>
+                    <li>Pedidos salariais, mesmo com indenização, para período em que não era servidor (atual servidor pedindo algo de quando ainda não era servidor ou ex-servidor pedindo algo de quando era servidor)</li>
+                    <li>Teto remuneratório e concurso de servidores de Cartórios/Serventias Notariais. <strong class="atencao">Se for outro assunto de Cartório, não é matéria estatutária (é domínio público).</strong></li>
+                    <li>Dispensa para Mandato Classista.</li>
+                    <li>Licença à lactante</li>
+                    <li>Redução de 50% da jornada de trabalho</li>
+                    <li>Valores de bolsa-auxílio de estagiários</li>
+                    <li class="competencia-item">Questões envolvendo avaliação funcional de servidor da FPE</li>
+                    <li>Processo seletivo de professor para cargo de diretor ou vice-diretor de Escola</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Vantagens > Instrutória > Estatutária</button>
+            <div class="collapsible-content">
+                <h4>SERVIDOR ATIVO:</h4>
+                <p class="atencao">(Atenção! Ativo é PP e inativo é PPREV)</p>
+                <ul>
+                    <li>Reajuste/Revisão Geral Anual</li>
+                    <li>Gratificações: GISAE, GDAP (correção monetária), GGERA, Gratificação de direção</li>
+                    <li>Incidência de abono família e auxílio-transporte sobre a gratificação natalina</li>
+                    <li>Pedido com reflexo nos vencimentos do servidor público (é atualmente servidor), mesmo que peça indenização também</li>
+                    <li>1/3 de férias atrasado (o normal é ser pago antecipadamente)</li>
+                    <li>Limitação de 30% de descontos na remuneração (empréstimos) de servidor ATIVO <strong class="atencao">(atenção! Isso quando o Estado for parte na ação - se for interessado apenas é domínio público)</strong></li>
+                    <li>Inclusão de auxílio refeição na base de cálculo para indenização de licença prêmio de servidor ATIVO (geralmente servidores do TJ, mas não somente)</li>
+                    <li class="competencia-item">Indenização de licença prêmio ou férias não gozadas de servidor ativo (geralmente do Poder Judiciário), exonerado, dispensado ou com contrato temporário encerrado <strong class="atencao">(atenção! Se for aposentado é matéria previdenciária e se for do executivo e não estiver expresso “exonerado, demitido, dispensado, contrato encerrado” também é previdenciária)</strong></li>
+                    <li>Difícil acesso</li>
+                    <li>Parcela autônoma</li>
+                </ul>
+
+                <h4>SERVIDOR ATIVO OU APOSENTADO (sempre PP):</h4>
+                <p class="atencao">(Atenção! Se for pensionista é PPREV)</p>
+                <ul>
+                    <li>Piso Nacional do magistério (Lei 11.738)</li>
+                    <li>Auxílio fardamento</li>
+                    <li>Vale-refeição (Lei 10.002)</li>
+                    <li>Substituição temporária</li>
+                    <li>Diárias / Diárias sobre 13°</li>
+                    <li>Lei Britto (Lei 10.395)</li>
+                    <li>Hora atividade</li>
+                    <li>Hora Extra (sobre 13°)</li>
+                    <li>Adicional de insalubridade</li>
+                    <li>Adicional noturno</li>
+                    <li>URV</li>
+                    <li>FGTS</li>
+                    <li>Desconto de salário por greve</li>
+                    <li>Ajuda de custo</li>
+                    <li>Promoções de servidor ativo ou aposentado <strong class="atencao">(atenção! Militar reformado/na reserva é matéria previdenciária)</strong></li>
+                    <li>Concessão de medalhas (honrarias) do serviço policial</li>
+                    <li>Adicional por tempo de serviço</li>
+                    <li>Restabelecimento da parcela autônoma de irredutibilidade absorvida pelo reajuste de 32%</li>
+                </ul>
+
+                <h4>SERVIDOR ATIVO, APOSENTADO OU PENSIONISTA (sempre PP):</h4>
+                <ul>
+                    <li>Ações de parcelamento de salário e 13° (mesmo que seja só indenização por dano moral).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="pprev-previdencia">
+            <h2>PPREV (áreas: previdenciária e IPÊ-Saúde)</h2>
+            <p class="atencao"><strong>Atenção:</strong> no caso de processos eletrônicos, o cadastro tanto de processos do interior quanto de Porto Alegre, das áreas previdenciária e ipê-saúde, deverá ser feito como PPREV. Os processos físicos que se enquadrem nestas categorias seguem sendo diferenciados entre interior (PI) e Porto Alegre (PPREV).</p>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > Previdenciária</button>
+            <div class="collapsible-content">
+                <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
+                <h4>EXCLUSIVO DA PPREV:</h4>
+                <ul>
+                    <li>Pensionista com pedidos de vantagens</li>
+                    <li>Pedido de pensão</li>
+                    <li>Questões de servidor militar reformado ou na reserva</li>
+                    <li>Qualquer assunto que envolva contribuição previdenciária, exceto impostos</li>
+                    <li>Aposentadoria especial</li>
+                    <li>Tempo de contribuição (contagem, averbação, etc)</li>
+                    <li class="competencia-item">Reversão de aposentadoria para retornar à ativa</li>
+                    <li>Pedido de paridade/isonomia de servidor inativo com ativo</li>
+                    <li>Abono Especial (LC 14.233/2013)</li>
+                    <li>PIS/PASEP</li>
+                    <li>Abono/gratificação de permanência (AIPSA/GIPSA)</li>
+                    <li>Auxílio-funeral</li>
+                    <li>Auxílio-doença</li>
+                    <li>Abono família</li>
+                    <li>Licença para tratamento de saúde (tudo o que envolver essa licença)</li>
+                    <li>Licença gestante (tudo o que envolver essa licença)</li>
+                    <li>Estabilidade/dispensa de funcionária gestante</li>
+                    <li>Licença adotante e paternidade</li>
+                    <li>Matéria de invalidez permanente (total ou parcial ou morte) – pretensão de pagamento de benefício financeiro (Leis 10.996/97 e/ou 12.577/06)</li>
+                    <li>CVMI – Corpo de Voluntários Militares Inativos</li>
+                    <li>Revisão/Correção/Reajuste de proventos da aposentadoria (inclusive FG incorporada na aposentadoria)</li>
+                    <li>Correção monetária e verbas parceladas administrativamente na aposentadoria</li>
+                    <li>Incorporar pagamento de carga horária de 40h na aposentadoria (palavras-chave: aposentadoria + subsídio + 20h + 40h)</li>
+                    <li>Readequação salarial de servidor aposentado da extinta Caixa Econômica Estadual</li>
+                    <li>Ação de cobrança contra o IPERGS - Pecúlio</li>
+                    <li>Utilização do abono permanência como base de cálculo para férias e 1/3 de férias, no momento da aposentadoria</li>
+                    <li class="competencia-item">Honorários de Defensor Dativo + pedido de isenção de contribuição previdenciária (incluir tese 1133)</li>
+                    <li class="competencia-item">Indenização por acidente de trabalho</li>
+                </ul>
+
+                <h4>SERVIDOR INATIVO/APOSENTADO:</h4>
+                <p class="atencao">(Atenção! Ativo é PP e inativo é PPREV)</p>
+                <ul>
+                    <li>Pedido/conversão de licença prêmio/especial ou férias não gozadas na atividade de servidor inativo/aposentado (válido também para pedidos de correções monetárias) <strong class="atencao">(atenção! a regra é PPREV e a exceção é PP. Se não estiver expresso que é algo de servidor ativo, demitido, exonerado, dispensado, então é obrigatoriamente PPREV)</strong></li>
+                    <li>Gratificações de servidor inativo/aposentado: GISAE, GICAP, GGERA, gratificação de direção...</li>
+                    <li>Lei 13.444/10 de servidor inativo/aposentado</li>
+                    <li>Reajuste/Revisão Geral Anual de servidor inativo/aposentado</li>
+                    <li>Ressarcimento de Etapas de Alimentação e Auxílio Fardamento de servidor na reserva (aposentado/reformado) referentes ao curso CTSP</li>
+                    <li>Incidência de auxílio-transporte sobre a gratificação natalina de servidor inativo/aposentado</li>
+                    <li>Promoções para militar na reserva, reformado ou para pensionistas</li>
+                    <li>Manutenção da base de cálculo dos triênios de servidor inativo/aposentado</li>
+                    <li>Limitação 30% de descontos na remuneração (empréstimos) de servidor inativo/aposentado (quando o Estado FOR parte na ação - se for interessado apenas é domínio público)</li>
+                    <li>Difícil acesso de servidor inativo/aposentado</li>
+                    <li>Parcela autônoma de servidor inativo/aposentado</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Alvará > Instrutória > Previdenciária</button>
+            <div class="collapsible-content">
+                 <ul>
+                    <li>Alvará de herdeiros ou pensionistas para levantamento de valor deixado por servidor falecido.</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > IPÊ-Saúde</button>
+            <div class="collapsible-content">
+                <p class="obs">(Em todos os casos a parte tem que ser o ipê, com ou sem o Estado junto)</p>
+                <ul>
+                    <li>Convênios/Contratos Administrativos. Carência/Descredenciamento. CONTRA O IPÊ</li>
+                    <li>Questões envolvendo plano de saúde do IPÊ ou PAC (atraso/falta de pagamento, carência, reinclusão, cancelamento, etc.)</li>
+                    <li>Contribuição de saúde (FAS)</li>
+                    <li>Cobrança de honorários médicos. CONTRA O IPÊ</li>
+                </ul>
+                <p class="atencao">(Atenção! Competência de questões de saúde são da PSAUDE a partir de 13/01/2025.)</p>
+            </div>
+        </section>
+        
+        <section id="pdpe-pi-dominio-publico">
+            <h2>PDPE/PI (área domínio público)</h2>
+             <button type="button" class="collapsible">Ordinária > Instrutória > Domínio Público</button>
+            <div class="collapsible-content">
+                <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
+                <ul>
+                    <li>Matéria ambiental</li>
+                    <li>Matrícula escolar</li>
+                    <li>Monitor escolar</li>
+                    <li>Licitações</li>
+                    <li>Questões envolvendo empresas e a Junta Comercial (JucisRS)</li>
+                    <li>Multa da Vigilância Sanitária</li>
+                    <li>ISSQN envolvendo contrato ou licitação</li>
+                    <li>Honorários de defensor dativo/curador especial (ação de cobrança) – incluir a tese 1133 (<strong class="atencao">se envolver pedido de isenção de IR é defesa tributária, se mencionar contribuição previdenciária é previdenciária</strong>).</li>
+                    <li>Ressarcimento de despesas (passagem, diárias, taxas, etc) por concurso público anulado.</li>
+                    <li>Processo seletivo Escola Tiradentes</li>
+                    <li>Processo seletivo da UERGS</li>
+                    <li>Expurgos inflacionários (Planos Bresser, Verão, Collor...)</li>
+                    <li class="competencia-item">Acolhimento institucional (envolvendo FASE ou FPE) - <span class="kalinka-highlight">atuação vai para Kalinka</span></li>
+                    <li class="competencia-item">Interdição (envolvendo FASE ou FPE) - <span class="kalinka-highlight">atuação vai para Kalinka</span></li>
+                    <li>Questões diversas envolvendo Cartórios/Serventias Notariais. <strong class="atencao">Se for questão de concurso ou teto remuneratório não é domínio (é estatutária).</strong></li>
+                    <li>Multa do PROCON</li>
+                    <li>Multa do TCE (estado réu)</li>
+                    <li>Solicitação de benefícios em razão da participação do Programa de Residência Médica</li>
+                    <li>Cobrança de honorários para perito ou assistente social</li>
+                    <li class="competencia-item">Cobrança de honorários de sucumbência que deveria ter sido dividido - Estado x Município e vice-versa (mesmo que o processo de origem seja de saúde)</li>
+                    <li class="competencia-item">Cobrança de créditos devidos por beneficiário do IPÊ-PREV ou IPÊ-SAÚDE. Ipê AUTOR.</li>
+                    <li class="competencia-item">Cobrança de contribuição previdenciária e/ou Ipê-Saúde. Ipê AUTOR.</li>
+                    <li>Preso ou apenado solicitando pecúlio/remuneração por dias trabalhados em presídio</li>
+                    <li>Contribuição sindical (quando a ação for proposta pelo sindicato)</li>
+                    <li>Internação ou manutenção de idoso em instituto de longa permanência (<strong class="atencao">Atenção! Se for somente esta questão é domínio, qualquer pedido de saúde já puxa a competência para PSAUDE</strong>).</li>
+                    <li>Empréstimo consignado do BANRISUL e as enchentes/situação de calamidade. (Se for ação coletiva vai pra GAB/AJL)</li>
+                    <li>Programa AVANÇAR do Estado</li>
+                    <li class="competencia-item">Ressarcimento de despesas médicas custeadas pelo paciente – CONTRA O ESTADO. (<strong class="atencao">Atenção! Se tiver ação de saúde anterior vinculada ao processo principal, não será domínio, mas sim saúde e se for contra o ipê será ipê-saúde – esses dois casos são PSAUDE.</strong>)</li>
+                    <li>Intimação referente a desconto em folha de servidor público - Estado não é parte, somente interessado/terceiro interessado</li>
+                    <li>Processos criminais/penais (exceto crime contra a ordem tributária que será matéria de arrecadação tributária)</li>
+                    <li>PIX SOS (pode ser ordinária ou indenizatória, dependendo dos pedidos)</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">Indenizatória > Instrutória > Domínio Público</button>
+            <div class="collapsible-content">
+                 <p class="obs">(A natureza “indenizatória” SÓ pode ser utilizada para a área domínio público)</p>
+                 <ul>
+                    <li>Indenização/reparação por danos morais e materiais. Quando quer só indenização, mesmo que seja servidor público.</li>
+                    <li>Indenização contra o DAER por más condições de estradas (exemplo: carro estragar por passar em um buraco)</li>
+                    <li>GDAP: indenização devido ao parcelamento da GDAP na gratificação natalina.</li>
+                 </ul>
+            </div>
+            <button type="button" class="collapsible">Usucapião > Instrutória > Domínio Público</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Estado é interessado e tem que adicionar a tese 2329</li>
+                    <li>Pode ser tanto bem imóvel quanto móvel</li>
+                </ul>
+            </div>
+            
+            <h3>PDPE/PI (demais casos)</h3>
+            <button type="button" class="collapsible">Execução de Título Extrajudicial > Execução por Quantia Certa > Arrecadação Não Tributária</button>
+            <div class="collapsible-content">
+                <p class="obs">(Estado ou entidade representada é o Autor/Credor/Exequente)</p>
+                <ul>
+                    <li>PROCRED *FUNAMEP *MICROCRÉDITO *FEAPER *FUNTERRA *RS RURAL
+                        <ul><li>Incluir tese de valor e tese 2229</li></ul>
+                    </li>
+                    <li>Execução de título extrajudicial referente à multa do TCE.
+                        <ul>
+                            <li>Incluir tese de valor e tese 2503</li>
+                            <li>Incluir na aba “Anotações” a informação da certidão (exemplo: “Certidão 195/2018”).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Anulação e Revisão de Ato Administrativo > Instrutória > Trânsito</button>
+            <div class="collapsible-content">
+                <ul><li>Anulação de infrações, CNH suspensa</li></ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > Trânsito</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Regularização de veículo junto ao Detran</li>
+                    <li>Remoção</li>
+                    <li>Diárias de guincho</li>
+                    <li>Restituição de veículo apreendido</li>
+                    <li>Trânsito</li>
+                    <li>Ressarcimento de multa de trânsito</li>
+                    <li>Examinador de trânsito – requisitos para o exercício</li>
+                    <li>Desconstituição de multas, mesmo havendo menção a tributos</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</button>
+            <div class="collapsible-content">
+                <ul><li>Cobrança de cotas condominiais (na petição a parte é condomínio ou há menção de imóvel ou há pedido de que o Estado pague algum débito condominial).</li></ul>
+                <p class="obs"><strong>Obs.:</strong> Pode se tratar de ação de cobrança também. Nestes casos, o cadastro fica como: Ordinária > instrutória > Domínio Público.</p>
+            </div>
+
+            <button type="button" class="collapsible">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Arrecadação Não Tributária</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Cumprimento de sentença da PGE, cujo processo de origem seja qualquer matéria, <strong class="atencao">exceto</strong> defesa/arrecadação tributária (Estado credor/exequente)
+                        <ul>
+                            <li>Incluir tese de valor</li>
+                            <li>Quando envolver honorários da PGE, incluir também a tese 2454</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Execução fiscal > Execução > Arrecadação Não Tributária</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Processo definido claramente como execução fiscal, o Estado é o Exequente. Exemplos de CDAs de natureza não tributária: Multa CISPOA DEC 39688/99; Multas penais; Multas diversas; Outros não tributários; Devolução restituição pessoal SEFAZ; Multa FEPAM; Multa Vig. Sanitária; Multa PROCOM; Multa FEASP Vet.; Honorários FADEP; Multa FEBRE AFTOSA SECOFA; Multas portuárias.
+                        <ul><li>Incluir tese de valor</li></ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Execução Hipotecária > Execução > Arrecadação Não Tributária</button>
+            <div class="collapsible-content">
+                 <ul><li>Processos em que o IPERGS é o exequente.</li></ul>
+            </div>
+        </section>
+        
+        <!-- Add other sections similarly -->
+        <section id="psaude">
+            <h2>PSAUDE (área saúde)</h2>
+            <button type="button" class="collapsible">Prestação de Serviços de Saúde > Instrutória > Saúde</button>
+            <div class="collapsible-content">
+                <p class="obs">(Sempre cuidar para deixar o “paciente” como parte principal no cadastro)</p>
+                <ul>
+                    <li>Pedido de medicamentos, internação compulsória, tratamento/ procedimentos médicos, fraldas, medida de proteção ao idoso, etc.</li>
+                    <li class="competencia-item">Repasse (ou corte) de valores de saúde do Estado para Municípios ou Hospitais</li>
+                    <li class="competencia-item">Ressarcimento de despesas médicas custeadas pelo Município, União, hospitais, instituições, etc. (pode aparecer como “ação de regresso")</li>
+                    <li class="competencia-item">Ressarcimento de despesas médicas custeadas pelo paciente, desde que tenha ação de saúde anterior vinculada ao processo principal.</li>
+                    <li>Custeio de energia elétrica para manutenção de equipamentos de saúde</li>
+                    <li>Cobrança de honorários médicos contra o Estado</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > IPÊ-Saúde</button>
+            <div class="collapsible-content">
+                 <p class="obs">(Em todos os casos a parte tem que ser o ipê, com ou sem o Estado junto)</p>
+                 <ul>
+                    <li>Para os mesmos casos listados acima, de prestação de saúde, porém com o IPÊ-SAÚDE como parte também.</li>
+                    <li>Para ressarcimento de despesas médicas custeadas pelo paciente. IPÊ é parte.</li>
+                 </ul>
+            </div>
+            
+            <button type="button" class="collapsible">Ordinária > Instrutória > Saúde</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>ESTADO AUTOR. Pode aparecer como ação regressiva, ação ordinária, ação de cobrança, etc. O Estado cobra valores de prestação de saúde que pagou erroneamente no lugar de Município, União ou alguma Entidade (Hospital, Clínica, etc.)</li>
+                    <li>ESTADO AUTOR. Cobrança de valor liberado em outro processo e sem a devida prestação de contas por parte do “paciente”. É ação de cobrança/ordinária mesmo e não cumprimento de sentença.</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Saúde</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Pedido de cumprimento de sentença ou execução provisória para prestação de serviço de saúde ou medicamentos. (NÃO adicionar tese)
+                        <ul><li>Vincular processo de origem</li></ul>
+                    </li>
+                </ul>
+                <p class="obs">OBS: nas ações de cumprimento de saúde, somente será cumprimento contra a fazenda pública se for execução de honorários (neste caso, incluir tese de valor e encaminhar para PPJ).</p>
+            </div>
+            
+            <button type="button" class="collapsible">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Ipê-Saúde</button>
+            <div class="collapsible-content">
+                 <ul>
+                    <li>Pedido de cumprimento de sentença ou execução provisória para prestação de serviço de saúde ou medicamentos. (NÃO adicionar tese)
+                        <ul><li>Vincular processo de origem</li></ul>
+                    </li>
+                 </ul>
+            </div>
+
+            <button type="button" class="collapsible">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Saúde</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Cumprimento de honorários contra Município (Estado credor) referente à ação de saúde
+                        <ul>
+                            <li>Vincular processo de origem</li>
+                            <li>Incluir tese de valor</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="pf-pi-tributaria">
+            <h2>PF/PI (áreas: Arrecadação Tributária ou Defesa Tributária)</h2>
+            <button type="button" class="collapsible">Execução fiscal > Execução > Arrecadação Tributária</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Processo definido claramente como execução fiscal, <strong class="competencia-item">Estado é exequente</strong>
+                        <ul><li>Incluir tese de valor</li></ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > Arrecadação Tributária</button>
+            <div class="collapsible-content">
+                 <ul>
+                    <li class="competencia-item">Ação Penal - Crimes contra a Ordem Tributária (petição inicial ajuizada pelo MP) - se for algo mais genérico de ação penal/criminal, é domínio público</li>
+                 </ul>
+            </div>
+
+            <button type="button" class="collapsible">Declaratória de Grupo Econômico > Instrutória > Arrecadação Tributária</button>
+            <div class="collapsible-content">
+                <p>Ação específica que menciona grupo econômico e grandes devedores. O Estado é AUTOR. A competência, caso não puxe automaticamente, é de quem fez a petição inicial.</p>
+            </div>
+
+            <button type="button" class="collapsible">Incidente de Classificação de Crédito Público > Instrutória > Arrecadação Tributária</button>
+            <div class="collapsible-content">
+                <p>Dentro da Classe Incidentes Processuais. É uma ação bem específica, às vezes começa mencionando Falência ou Recuperação Judicial, mas no despacho final é possível confirmar que se trata desse incidente processual.</p>
+                <ul><li>Vincular processo de origem (sempre é uma falência ou recuperação judicial)</li></ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > Defesa Tributária</button>
+            <div class="collapsible-content">
+                <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
+                <ul>
+                    <li>Cobrança indevida de tributos (ICMS, IRPF, ITCD, etc)</li>
+                    <li>Taxa Detran “TSD”</li>
+                    <li>Isenção de ICMS, IPVA ou Imposto de Renda por motivo de doença</li>
+                    <li>Desconto de Imposto de Renda sobre GIPSA/AIPSA/URV/GDAP (qualquer gratificação)</li>
+                    <li>Restituição/isenção do imposto de renda e contribuição previdenciária (os 2 juntos)</li>
+                    <li>Inscrição em dívida ativa por causa de tributos</li>
+                    <li>CADIN (desde que a origem seja tributária)</li>
+                    <li class="competencia-item">Divórcio (EST RS interessado)</li>
+                    <li class="competencia-item">Testamento (EST RS interessado)</li>
+                    <li class="competencia-item">Alteração de regime de bens (EST RS interessado)</li>
+                    <li>Simples Nacional</li>
+                    <li>Compensação de obrigações tributárias com precatórios (compensar dívida tributária com crédito de precatório)</li>
+                    <li class="competencia-item">Honorários de Defensor Dativo + pedido de isenção de IR (incluir tese 1133)</li>
+                    <li>Golpe do PIX do IPVA falso</li>
+                </ul>
+            </div>
+            
+            <button type="button" class="collapsible">Alvará > Instrutória > Defesa Tributária</button>
+            <div class="collapsible-content">
+                <p>Quando há pedido de levantamento de valores em decorrência de inventário de pessoa falecida que não era servidor público... A intimação é referente a algum tributo.</p>
+                <p class="obs">OBS: se for a pessoa que faleceu era servidora pública, a competência é da PPREV.</p>
+            </div>
+
+            <button type="button" class="collapsible">Cumprimento de sentença contra a Fazenda Pública (estado no polo passivo)</button>
+            <div class="collapsible-content">
+                <p>Quando há pedido de execução/cumprimento de sentença sobre o valor de ICMS, vai para PF (tanto área arrecadação tributária quanto defesa tributária)</p>
+                <ul>
+                    <li>Vincular processo de origem</li>
+                    <li>Incluir tese de valor</li>
+                </ul>
+                <p class="obs">OBS: nos demais casos de execução ou cumprimento de sentença, mesmo a origem sendo da PF, o processo de execução/cumprimento vai para a PPJ/SEC-CS (no caso de Porto Alegre – origem da PI continua com a PI).</p>
+            </div>
+            
+            <button type="button" class="collapsible">Cumprimento de sentença definitivo de pagar quantia certa > Execução > Arrecadação Tributária (estado no polo ativo)</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Cumprimento de sentença da PGE, cujo processo de origem seja defesa tributária ou arrecadação tributária (Estado credor/exequente)
+                        <ul>
+                            <li>Vincular processo de origem</li>
+                            <li>Incluir tese de valor</li>
+                            <li>Quando envolver honorários da PGE, incluir também a tese 2454</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h4>Cadastro conforme a natureza de cada tipo:</h4>
+            <p class="obs">(Área Arrecadação Tributária quando houver vinculação com processo de Execução Fiscal Tributária e área Defesa Tributária quando não se identificar relação com processo de Execução Fiscal Tributária)</p>
+            <ul>
+                <li>Inventário (EST RS interessado) geralmente defesa tributária</li>
+                <li>Arrolamento (EST RS interessado) geralmente defesa tributária</li>
+                <li>Sobrepartilha (EST RS interessado) geralmente defesa tributária</li>
+                <li>Protesto ou sustação de protesto relacionado à matéria fiscal/tributária (se for outra matéria, é domínio público)</li>
+                <li class="competencia-item">Falência (EST RS interessado) - ARRECADAÇÃO TRIBUTÁRIA</li>
+                <li class="competencia-item">Recuperação de empresa (EST RS interessado) - ARRECADAÇÃO TRIBUTÁRIA</li>
+            </ul>
+        </section>
+
+        <section id="pdpa-pi-disciplinar">
+            <h2>PDPA/PI (área administrativo-disciplinar)</h2>
+            <button type="button" class="collapsible">Anulação e Revisão de Ato Administrativo > Instrutória > Administrativo-disciplinar</button>
+            <div class="collapsible-content">
+                <ul><li>Anulação de PAD, Sindicância ou punição resultante do PAD</li></ul>
+            </div>
+
+            <button type="button" class="collapsible">Ordinária > Instrutória > Probidade Administrativa</button>
+            <div class="collapsible-content">
+                <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc. Neste caso o mais comum é Ação Civil Pública de Interesses Difusos e Coletivos)</p>
+                <ul><li>Questões envolvendo improbidade administrativa e ANPC (Acordo de Não Persecução Cível)</li></ul>
+            </div>
+        </section>
+
+        <section id="ppj-pi-passivos">
+            <h2>PPJ ou PI</h2>
+            <p class="atencao"><strong>Atenção:</strong> processos do interior com as áreas estatutária, previdenciária e trânsito são de competência da PPJ. Os demais, seguem regras específicas. Ipê-saúde pode ser PSAUDE ou PPJ, saúde pode ser PSAUDE ou PPJ, defesa tributária pode ser PF ou PPJ... além das demais áreas, que podem ser PI (interior) ou PPJ (Porto Alegre).</p>
+            <p class="atencao"><strong>Atenção de novo:</strong> cumprimento de sentença, neste caso, será sempre contra a fazenda pública. Se for cumprimento a favor da fazenda pública ou de obrigação de fazer/não fazer, a competência vai ser de outra especializada.</p>
+
+            <button type="button" class="collapsible">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > "Área do processo de origem"</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Ações de execução ou cumprimento de sentença para cobrança de valores contra o Estado.
+                        <ul>
+                            <li>Na “área”, copiar a área do processo de origem, exceto defensor dativo.</li>
+                            <li>Vincular processo de origem, exceto defensor dativo.</li>
+                            <li>Incluir tese de valor.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <button type="button" class="collapsible">Cumprimento de sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Ipê-Saúde</button>
+            <div class="collapsible-content">
+                <ul><li class="competencia-item">Diferente do cumprimento de saúde (sem ipê), se for cumprimento de sentença de valores contra o ipê-saúde se encaixa nesse caso aqui e não como PSAUDE.</li></ul>
+            </div>
+
+            <button type="button" class="collapsible">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Domínio Público</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Ação de execução ou cumprimento de sentença de honorários de defensor dativo (pode aparecer também como “execução de título judicial").
+                        <ul><li>Incluir tese de valor e tese 1133.</li></ul>
+                    </li>
+                    <li>Ação de execução de honorários periciais do INSS contra o Estado. O Estado não faz parte da ação originária, é necessário ver o despacho no final dos autos para confirmar se é este o caso. Mesmo que a ação seja ordinária, o cadastro fica padrão como cumprimento de sentença.</li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Ação de execução de título extrajudicial de honorários de defensor dativo/curador especial
+                        <ul><li>Incluir tese de valor e tese 1133.</li></ul>
+                    </li>
+                    <li>Processos de Execução de Títulos Extrajudiciais referentes à taxa de água e/ou esgoto (DMAE).
+                        <ul><li>Incluir tese de valor</li></ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Defesa Tributária</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Processos de Execução de Títulos Extrajudiciais referentes a IPTU e taxa de lixo.
+                        <ul><li>Incluir tese de valor</li></ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <button type="button" class="collapsible">Processo de Conhecimento > Arbitramento de Honorários > Instrutória > Área conforme a origem</button>
+            <div class="collapsible-content">
+                <ul><li>É uma ação bem específica de arbitramento de honorários. Sempre tem um processo a ser vinculado e a área deve ser copiada deste processo. Lembrar de vincular o processo de origem.</li></ul>
+            </div>
+
+            <button type="button" class="collapsible">Execução fiscal > Execução > Defesa Tributária (ou Domínio Público)</button>
+            <div class="collapsible-content">
+                <ul><li>Execução fiscal na qual o <strong class="competencia-item">Estado</strong> conste no <strong class="competencia-item">polo passivo</strong> (geralmente execução fiscal movida pelo município).</li></ul>
+                <p>No caso de Porto Alegre, execução fiscal da 8ª Vara é sempre PPJ (geralmente é um processo do município contra o estado)</p>
+                <ul><li>Incluir tese de valor</li></ul>
+                <p class="atencao"><strong>Atenção!</strong> Se a execução fiscal for de IPTU ou Taxa de Lixo, é Defesa Tributária, porém se for referente a questões de Água e Esgoto (DMAE) é domínio público.</p>
+                <p class="obs">OBS: quando o Estado é terceiro interessado geralmente o cadastro é este aqui também.</p>
+            </div>
+            
+            <button type="button" class="collapsible">Incidentes Processuais > Outros incidentes > Instrutória...</button>
+            <div class="collapsible-content">
+                 <ul>
+                    <li>Para processos administrativos do TJRS com cobrança de custas processuais
+                        <ul>
+                            <li>Usar a área do processo de origem</li>
+                            <li class="competencia-item">Enviar a atuação para a PPJ/SEC/Secretaria</li>
+                        </ul>
+                    </li>
+                 </ul>
+            </div>
+        </section>
+        
+        <section id="questoes-diversas">
+            <h2>Questões diversas</h2>
+            <p class="obs">OBS: a ideia aqui é utilizar as palavras-chaves mais óbvias, para que vocês possam buscar com o "Ctrl + F".</p>
+        </section>
+
+        <section id="competencia-procuradorias">
+            <h2>Competência das Procuradorias:</h2>
+            <button type="button" class="collapsible">PP – Procuradoria de Pessoal</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Área Estatutária de processos eletrônicos de Porto Alegre e do interior.</li>
+                    <li>Atuações da PP vão para PP/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">PPREV – Procuradoria Previdenciária</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Áreas Previdenciária e Ipê-Saúde de processos eletrônicos de Porto Alegre e do interior.</li>
+                    <li>Atuações da PPREV vão para PPREV/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
+                </ul>
+            </div>
+             <button type="button" class="collapsible">PDPE – Procuradoria de Domínio Público Estadual</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Áreas Arrecadação Não Tributária e Domínio Público de processos de Porto Alegre.</li>
+                    <li class="competencia-item">Área Trânsito de processos eletrônicos tanto do interior quanto de Porto Alegre.</li>
+                    <li>Atuações da PDPE vão para PDPE/SEC/Secretaria.</li>
+                    <li class="atencao"><strong>Atenção!</strong> Atuações do interior de Arrecadação Não Tributária vão para a Secretaria da 06ª PR, de Domínio Público vão para a PI-SEC e de Trânsito vão para a PDPE-SEC.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">PSAUDE – Procuradoria de Saúde</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Área Saúde e Ipê-Saúde de processos eletrônicos tanto do interior quanto de Porto Alegre.</li>
+                    <li>Atuações da PSAUDE vão para PSAUDE/SEC/Secretaria.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">PF – Procuradoria Fiscal</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Áreas Arrecadação Tributária e Defesa Tributária de processos de Porto Alegre.</li>
+                    <li>Neste caso, qualquer processo do interior, físico ou eletrônico, é de competência da PI.</li>
+                    <li>Atuações da PF vão para PF/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">PDPA – Procuradoria Disciplinar e de Probidade Administrativa</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Áreas Administrativo-Disciplinar e Probidade Administrativa de processos de Porto Alegre.</li>
+                    <li>Neste caso, qualquer processo do interior, físico ou eletrônico, é de competência da PI.</li>
+                    <li>Atuações da PDPA vão para PDPA/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">GAB/AJL – Gabinete/Assessoria Jurídica e Legislativa</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Para ações que sejam mais relevantes. Ações do momento, como por exemplo, do COVID, ou de alguma questão que esteja em noticiário. Geralmente são ações coletivas, como Ação Popular, Ação Civil Pública, Mandado de Segurança, mas nem sempre (não dá para se guiar só por isso). Processos de Procuradores da PGE sempre vão para GAB/AJL.</li>
+                    <li>Atuações vão para GAB/AJL/Assessoria Jurídica e Legislativa.</li>
+                </ul>
+            </div>
+            <button type="button" class="collapsible">GAB/CAJAPDI – Coordenação-Geral das Assessorias Jurídicas da Administração Pública Direta e Indireta</button>
+            <div class="collapsible-content">
+                 <ul>
+                    <li>Somente encaminhamos atuações diretamente ao grupo da CAJAPDI nos casos de ADINs.</li>
+                    <li>Atuações vão para GAB/CAJAPDI/Procuradores.</li>
+                 </ul>
+            </div>
+            <button type="button" class="collapsible">PPJ – Procuradoria de Passivos Judiciais</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li>Para ações de cumprimento de sentença contra o Estado, RPV e precatórios de Porto Alegre.</li>
+                    <li>Para processos eletrônicos do interior de cumprimento de sentença contra o Estado das seguintes áreas: estatutária, previdenciária, saúde, ipê-saúde e trânsito.</li>
+                    <li>Atuações da PI vão para PI/SEC/Secretaria e as de Porto Alegre podem ir para um dos seguintes grupos:
+                        <ul>
+                            <li>PPJ/SEC/SEC-CS (quando se tratar de ação de cumprimento de sentença contra a fazenda pública)</li>
+                            <li>PPJ/SEC/SEC-PAG (quando se tratar de ação de pagamento de RPV, precatório, pagamento espontâneo ou execução invertida)</li>
+                            <li>PPJ/SEC/Secretaria (recursos – exceto precatório)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+             <button type="button" class="collapsible">PTRAB – Procuradoria Trabalhista</button>
+            <div class="collapsible-content">
+                <ul>
+                    <li class="competencia-item">Área Trabalhista de processos do interior e de Porto Alegre. Apenas para ações trabalhistas. Nenhum processo cível deve ser cadastrado com essa área nem ser encaminhado à PTRAB.</li>
+                    <li>Atuações vão para PTRAB/SEC/Secretaria.</li>
+                    <li>Precatório trabalhista, com intimação pela JAP (Juízo Auxiliar de Precatório), a regra geral é PTRAB, exceto se for caso de “compensa” (PF) ou "conciliação” (GAB/CCP).</li>
+                </ul>
+                <h4>Competência da PI está dividida da seguinte forma:</h4>
+                <ul>
+                    <li>Administrativo-disciplinar, probidade administrativa, arrecadação tributária, domínio público = PI</li>
+                    <li>Arrecadação Não Tributária = 06ª PR</li>
+                    <li>Defesa Tributária = 19ª PR</li>
+                    <li>Processos ELETRÔNICOS da área estatutária = PP</li>
+                    <li>Processos ELETRÔNICOS da área previdenciária = PPREV</li>
+                    <li>Processos ELETRÔNICOS da área ipê-saúde= PSAUDE ou PPREV</li>
+                    <li>Processos ELETRÔNICOS da área trânsito = PDPE</li>
+                    <li>Processos ELETRÔNICOS de cumprimento de sentença contra a fazenda pública das áreas acima = PPJ</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="orientacoes-cumprimento-sentenca">
+            <h2>Orientações sobre Cumprimento de Sentença:</h2>
+            <h4>Regra geral:</h4>
+            <ul>
+                <li>Vincular processo de origem.
+                    <ul><li>Exceção: honorários de defensor dativo não precisa vincular.</li></ul>
+                </li>
+                <li>Copiar a área do processo de origem.
+                    <ul>
+                        <li>Exceções:
+                            <ol>
+                                <li>Defensor dativo é sempre domínio público.</li>
+                                <li>Honorários da PGE é sempre <strong class="competencia-item">arrecadação tributária</strong> (quando o de origem for arrecadação tributária ou defesa fiscal) ou <strong class="competencia-item">arrecadação não tributária</strong> (quando o de origem for qualquer uma das outras áreas não tributárias).</li>
+                                <li>Se o de origem estiver com área genérica (execução ple, por exemplo), é importante descobrir a área correta para cadastrar.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li>Incluir tese de valor.
+                    <ul><li>Exceções: cumprimento de obrigação de fazer e pagamento espontâneo não têm tese de valor.</li></ul>
+                </li>
+                <li>Teses específicas: 1133 no caso de defensor dativo e 2454 no caso de honorários da PGE.</li>
+            </ul>
+
+            <h4>Cumprimento contra a fazenda pública:</h4>
+            <p>Ações que o Estado é DEVEDOR (polo passivo), geralmente PI ou PPJ (PI se o processo de origem estiver no interior e PPJ se o processo de origem estiver em Porto Alegre).</p>
+            <ul><li>Incluir tese de valor e associar processo de origem.</li></ul>
+
+            <h4>Cumprimento de obrigação de fazer:</h4>
+            <p>Ações que, normalmente, o Estado também é DEVEDOR (polo passivo). Nestes casos, pode ser PI, se o processo de origem estiver no interior, ou qualquer Unidade Especializada de Porto Alegre (dependendo da matéria), se o processo de origem for de Porto Alegre. O mais comum é para ações de saúde, que seriam PDPE (saúde) ou PPREV (ipê-saúde), mas pode ter cumprimento de obrigação de fazer de QUALQUER área.</p>
+            <ul><li>Associar processo de origem.</li></ul>
+            
+            <h4>Cumprimento de pagar quantia certa:</h4>
+            <p>Usamos essa natureza para ações em que o Estado é o CREDOR (polo ativo). Neste caso, pode ser PI, se o processo for do interior e tiver sido ajuizado por alguma PR ou de qualquer Unidade Especializada de Porto Alegre, dependendo de qual Unidade ajuizou a ação (os casos mais comuns são PDPE e PF, mas pode ser qualquer unidade).</p>
+            <ul>
+                <li>Neste caso, a área será quase sempre <strong class="competencia-item">ARRECADAÇÃO NÃO TRIBUTÁRIA</strong>. (neste caso, não copiaremos a área do processo associado).
+                    <ul><li><strong>Exceção da exceção:</strong> só não será arrecadação não tributária quando o de origem for Arrecadação Tributária ou Defesa Tributária. Nestes casos, se for cobrança de honorários da PGE, usar somente Arrecadação Tributária (mesmo que o de origem seja defesa tributária).</li></ul>
+                </li>
+                <li>Incluir tese de valor e associar processo de origem.</li>
+                <li>No caso de honorários da PGE, incluir também a tese 2454.</li>
+            </ul>
+
+            <h4>Pagamento espontâneo:</h4>
+            <p>Vai sempre para a PPJ, mesmo que seja de processo do interior.</p>
+            <ul><li class="competencia-item">Associar processo de origem e enviar a atuação para PPJ/SEC/SEC-PAG.</li></ul>
+        </section>
+
+        <section id="incluir-tese">
+            <h2>Processos em que é necessário incluir tese:</h2>
+            <ul>
+                <li>Usucapião (tese 2329)</li>
+                <li>Execução de título extrajudicial área arrecadação não tributária - de matéria bancária (procred, funamep, etc) (tese 2229 e tese de valor)</li>
+                <li>Execução fiscal (tese de valor)</li>
+                <li>Execução de título extrajudicial área arrecadação não tributária - de matéria TCE (tese 2503 e tese de valor)</li>
+                <li>Cumprimento de sentença contra a fazenda pública ou de pagar quantia certa (tese de valor)</li>
+                <li>Ações de defensor dativo/curador especial (se for ordinária, só tese 1133, se for cumprimento de sentença, tese 1133 e tese de valor)</li>
+                <li>Cumprimento de sentença de honorários em favor da PGE (tese 2454 e tese de valor)</li>
+            </ul>
+        </section>
+
+        <section id="cadastro-embargos">
+            <h2>Cadastro de Embargos:</h2>
+            <p><strong>Classe:</strong> Embargos</p>
+            <p><strong>Natureza:</strong> pode ser uma dessas três:</p>
+            <ul>
+                <li>Embargos à Execução Fiscal = quando o processo de origem for uma execução fiscal</li>
+                <li>Embargos à Execução de Título Extrajudicial = quando o processo de origem for uma execução extrajudicial</li>
+                <li>Embargos à Execução - Art. 745 CPC (não utilizar) = quando não se encaixar em nenhuma das duas opções</li>
+            </ul>
+        </section>
+
+        <section id="cadastro-partes">
+            <h2>Cadastramento de Partes:</h2>
+            <ul>
+                <li>A regra é criar uma parte nova.</li>
+                <li>Apenas aproveitamos uma parte nos seguintes casos:
+                    <ul>
+                        <li>Quando a parte a ser cadastrada já tiver um (apenas um) cadastro exatamente igual no cpj, com o mesmo rg e/ou cpf (se for apenas o nome igual, não se enquadra nessa exceção e dever criada nova parte).</li>
+                        <li>Quando for uma parte “genérica”, tipo Municípios, Ministério Público, Secretarias, etc.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="obs">OBS: seguir o arquivo GUIA - Cadastro de partes.docx</p>
+        </section>
+
+        <section id="escolher-fase">
+            <h2>Como saber qual fase escolher:</h2>
+            <ol>
+                <li>Classe “Cumprimento de Sentença” = fase “Execução”.</li>
+                <li>Classe “Embargos” = fase “Execução”.</li>
+                <li>Classe “Falência e Recuperação Judicial” = fase “Instrutória”.</li>
+                <li>Classe “Incidentes Processuais” = fase “Instrutória”, <strong class="atencao">exceto</strong> as duas naturezas de "Liquidação...” que devem ser cadastradas com a fase “Liquidação”.</li>
+                <li>Classe “Precatória e Rogatória" = fase “Instrutória” para todas as naturezas, <strong class="atencao">exceto</strong> a natureza “Atos Executórios”, cuja fase deve ser “Execução”.</li>
+                <li>Classe “Precatório” = fase “Pagamento”, <strong class="atencao">exceto</strong> nos casos do “Compensa", que a fase deve ser a “Compensação Lei 15.038/2017”.</li>
+                <li>Classe “Proced. Esp. Jurisd. Contenc.” = fase “Instrutória”.</li>
+                <li>Classe "Proced. Esp. Jurisd. Volunt.” = fase “Instrutória”.</li>
+                <li>Classe “Processo Administrativo” = depende de cada caso, seguir orientações específicas.</li>
+                <li>Classe "Processo Cautelar" = fase "Instrutória".</li>
+                <li>Classe "Processo de Conhecimento" = fase "Instrutória".</li>
+                <li>Classe “Processo de Execução” = fase “Execução”.</li>
+                <li>Classe “Processo de Execução de Título Extrajudicial” = fase “Execução”.</li>
+                <li>Classe “Recursos" = fase “Recursal”.</li>
+                <li class="competencia-item">Classe "Recursos Turmas" = fase "Recursal".</li>
+                <li>Classe "Tutela Provisória" = fase "Instrutória".</li>
+            </ol>
+        </section>
+
+        <section id="atuacoes-civeis">
+            <h2>Atuações cíveis</h2>
+            <h3>1º grau:</h3>
+            <ul>
+                <li>Verificar se é caso de virtualização/migração;</li>
+                <li>Conferir se a parte cadastrada é igual à da petição inicial;</li>
+                <li>Completar o cadastro com as informações de classe, natureza, fase, área, órgão de execução (quando necessário alterar) e data de citação ou intimação da PGE;</li>
+                <li>Se necessário, incluir tese;</li>
+                <li>Se necessário, vincular processo associado;</li>
+                <li>No caso de execução de título extrajudicial do TCE, incluir o número da certidão do TCE (conforme petição inicial) na aba Anotação.</li>
+            </ul>
+            <h3>2º grau:</h3>
+            <ul>
+                <li>Procurar processo de origem e, se houver, fazer a vinculação na aba Proc. Associado;</li>
+                <li>Usar o processo de origem como base do cadastramento do recurso (se não tiver processo de origem, tem que ler a petição mais atentamente);</li>
+                <li>Completar o cadastro com as informações de classe, natureza, fase (quase sempre recursal), área (igual à área do processo de origem), órgão de execução (sempre de Porto Alegre) e data de intimação da PGE.</li>
+                <li>Recurso de Medida Cautelar (Turmas Recursais): ver na petição do recurso ou no despacho final, se mencionar algum recurso específico (como Agravo de Instrumento, por exemplo), usar a natureza mencionada no despacho ou petição. Se constar apenas “Recurso de Medida Cautelar”, utilizar a natureza Recurso Inominado contra Liminar – Turma Recursal JEFP no cadastro do CPJ.</li>
+                <li>Quando o ÓRGÃO for Departamento de Recursos aos Tribunais Superiores, significa que o recurso a ser cadastrado será sempre um Recurso Especial (RESP) ou Recurso Extraordinário (REXT). Para confirmar a classificação, investigar no processo de 1º grau, normally associado.</li>
+                <li class="competencia-item">Precatório: *Classe: Precatório > *Natureza: Alimentar ou Não Alimentar (conforme o que estiver marcado na planilha inicial dos autos) > *Fase: Pagamento > *Área: conforme o processo de origem > Órgão de Execução: PPJ. <br><strong>Deve-se sempre vincular o processo de origem, informar o número do precatório físico no campo “Número antigo” e a atuação é encaminhada para PPJ/SEC/SEC-PAG.</strong></li>
+            </ul>
+            <p class="obs">OBS: no caso de Agravo de Instrumento, seguir o arquivo Manual do Agravo de Instrumento.docx</p>
+            <p class="obs">OBS2: no caso de Precatório do Eproc, seguir o arquivo MANUAL - Precatórios cíveis via atuação.docx</p>
+        </section>
+
+        <section id="trabalhista">
+            <h2>Trabalhista:</h2>
+            <ul><li>SUPP</li></ul>
+        </section>
+
+        <section id="execucoes-fiscais-bd1">
+            <h2>Execuções fiscais (relatório extraído do BD-1):</h2>
+            <ul>
+                <li>Fazer o cadastro conforme informações do relatório que é encaminhado via e-mail;</li>
+                <li>Copiar a petição inicial, pesquisá-la no CPJ e criar processo a partir dela;</li>
+                <li>Se a natureza da ação for “não tributária”, alterar a área do cadastro para arrecadação não tributária;</li>
+                <li>Finalizar o cadastro, entrar no processo e incluir tese de valor.</li>
+            </ul>
+            <p class="obs">OBS: seguir o arquivo MANUAL - Execuções fiscais.docx</p>
+        </section>
+        
+        <section id="proa">
+            <h2>PROA:</h2>
+            <ul>
+                <li>No PROA: consultar o processo judicial, o número do PROA e baixar o documento integral;</li>
+                <li>No CPJ: fazer o cadastro do processo judicial de acordo com o documento do PROA, vincular o número do PROA, incluir o documento integral e criar atuação de acordo com a comunicação da documentação do PROA (mandado, ofício...);</li>
+                <li>Enviar tanto o PROA quanto a atuação para o mesmo órgão de execução (PPREV, PI, PDPE, etc.).</li>
+                <li>Escrever a providência PROA nas atuações.</li>
+                <li class="competencia-item">PROA COMPENSA: único caso que fazemos o cadastro do PROA no CPJ e não de uma ação judicial. Competência da PF/ECS.</li>
+                <li>PROA CEEE EX-AUTÁRQUICO: ações trabalhistas. O cadastro é normal, a única diferença é a inclusão da providência na atuação: PROA. CEEE ex-autárquico.</li>
+                <li>PROA TRABALHISTA: pode ser RPV (processo já cadastrado no CPJ, basta atualizar), CEEE ex-autárquico (tem providência específica na atuação) ou qualquer ação normal.</li>
+            </ul>
+            <p class="obs">OBS: seguir o arquivo MANUAL - PROA.docx</p>
+        </section>
+
+        <section id="virtualizacao-migracao">
+            <h2>Virtualização 1G e Migração 1G:</h2>
+            <p>A virtualização é de processo físico (themis) para eletrônico (eproc). A migração é de processo eletrônico (ethemis/ppe) para outro eletrônico (eproc).</p>
+            <h4>Virtualização 1G (físico/themis para eletrônico/eproc):</h4>
+            <ul>
+                <li>Verificar se consta a informação de digitalização/virtualização no primeiro evento do Ver Autos.</li>
+                <li>Pesquisar o número de origem/físico no CPJ, com comarca, para confirmar se tem ou não cadastro.</li>
+                <li>Se o processo de origem/físico tiver cadastro no CPJ, fazer a vinculação e encaminhar a atuação para a chefia da CAD.</li>
+                <li>Se o processo de origem/físico não tiver registro no CPJ, prosseguir normalmente com o cadastro, bem como a inclusão do número antigo (sem comarca) no respectivo campo.</li>
+            </ul>
+            <h4>Migração 1G (eletrônico/ethemis/ppe para eletrônico/eproc):</h4>
+            <ul>
+                <li>Verificar se consta a informação de digitalização/virtualização/migração no primeiro evento do Ver Autos.</li>
+                <li>Fazer o cadastro direto já vinculando o número do PPE/ETHEMIS no campo número antigo.</li>
+                <li>Ao finalizar o cadastro, se o CPJ informar que o processo já existe, encaminhar a atuação para a chefia.</li>
+            </ul>
+            <p class="obs">OBS: seguir o arquivo MANUAL - Virtualizados e Migrados para Eproc.docx</p>
+        </section>
+
+        <section id="ant">
+            <h2>Arrecadação Não Tributária (ANT):</h2>
+            <ol>
+                <li>Em regra, não utilizar essa área para processos que o estado esteja no polo passivo (réu, devedor, executado, etc). <strong class="atencao">Exceção:</strong> cumprimento de sentença contra a fazenda pública com processo de origem ANT.</li>
+                <li>Todos os processos com esta área do interior devem ser encaminhados diretamente para a secretaria da 06ª PR, com a devida alteração da equipe do processo para 06ª PR também. No caso de Agravo de Instrumento, manter o cadastro com o órgão de execução de Porto Alegre, mas mandar a atuação diretamente para a 06ª PR (não precisa informar a comarca).</li>
+                <li>Os casos de ANT são (todos com Estado autor/credor):
+                    <ol type="a">
+                        <li>Execução extrajudicial "bancária" (PROCRED, FUNAMEP, MICROCRÉDITO, FEAPER, FUNTERRA E RS RURAL).</li>
+                        <li>Execução extrajudicial “TCE”.</li>
+                        <li>Processos de execução fiscal com CDA de natureza não tributária.</li>
+                        <li>Ações autônomas relacionadas a título executivo extrajudicial e cumprimento de sentença. Exceto processos de arrecadação tributária, cujos cumprimentos de sentença se mantêm no núcleo fiscal/tributário.</li>
+                        <li>Cumprimento de honorários da PGE de qualquer área que <strong class="atencao">não</strong> seja arrecadação/defesa tributária.</li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+
+        <section id="arrecadacao-x-defesa-tributaria">
+            <h2>Arrecadação Tributária x Defesa Tributária:</h2>
+            <ol>
+                <li>Em regra, Estado no polo ativo é Arrecadação Tributária e Estado no polo passivo é Defesa Tributária.</li>
+                <li>Em regra, nos processos derivados (embargos, cumprimento contra a fazenda pública, recursos) basta copiar a área (Arrecadação Tributária ou Defesa Tributária) do processo de origem.</li>
+                <li>Cumprimento de sentença de pagar quantia certa (Estado no pólo ativo) = utilizar a área arrecadação tributária (desde que o processo de origem seja arrecadação/defesa tributária).</li>
+                <li>Utilizar Defesa Tributária para os processos de inventário, arrolamento e sobrepartilha.</li>
+                <li>Casos mais complexos: ações ordinárias que mencionem execuções fiscais e casos em que o Estado seja apenas interessado e não parte. Nestes casos, geralmente, se o pedido for expressamente relacionado com a execução fiscal, utiliza-se a área Arrecadação Tributária, caso contrário, deve-se utilizar a área Defesa Tributária.</li>
+            </ol>
+        </section>
+        
+        <section id="varas-especializadas">
+            <h2>Varas Especializadas:</h2>
+            <ol>
+                <li>A 6ª Vara da Fazenda Pública de Porto Alegre é referente a processos tributários. Em 99% dos casos, quando o processo for dessa vara será de competência da PF.</li>
+                <li>A 8ª Vara da Fazenda Pública de Porto Alegre é similar à 6ª, porém referente a processos do Município. Todas as execuções fiscais desta Vara terão o Estado como réu/devedor e são de competência da PPJ.</li>
+            </ol>
+        </section>
+
+        <section id="estado-interessado">
+            <h2>Estado como parte interessada:</h2>
+            <p>Muitas vezes o Estado não consta como parte do processo (polo ativo ou passivo), sendo considerado apenas uma parte interessada. Alguns casos já temos por hábito fazer um cadastro padrão, exemplos:</p>
+            <ul>
+                <li>Defesa tributária: inventário, arrolamento, sobrepartilha, divórcio, alteração de regime de bens, etc.</li>
+                <li>Arrecadação tributária: falência e recuperação judicial.</li>
+                <li>Domínio público: usucapião.</li>
+            </ul>
+            <p>Em outras situações, não há um padrão. Nestes casos sem padrão, é necessário sempre interpretar qual será a atuação da PGE naquele processo específico. As ações mais comuns são as de execução de alimentos e alvarás, mas podem ter vários tipos. Exemplo: se é um alvará referente a dinheiro de servidor ativo (envolvendo desconto em contracheque ou algo do tipo), será competência da PP, se for algo de servidor inativo ou pensionista será PPREV. No caso de questões de trânsito (restituir automóvel, recolher CNH, etc), utilizaremos esta área mesmo. Tudo depende do que o juiz está determinando ao Estado.</p>
+            <p class="obs"><strong>Dica:</strong> ver o despacho, ofício ou sentença final, pois geralmente o Estado está sendo intimado por causa desta informação final e não necessariamente pelo assunto principal da petição inicial.</p>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Collapsible sections
+            const collapsibles = document.getElementsByClassName("collapsible");
+            for (let i = 0; i < collapsibles.length; i++) {
+                collapsibles[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    const content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            const sections = document.querySelectorAll('#main-content section');
+            let originalContent = new Map(); // To store original innerHTML of searchable elements
+
+            // Store original content of list items and paragraphs for reset
+            sections.forEach(section => {
+                section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p').forEach(el => {
+                    if (!originalContent.has(el)) {
+                         originalContent.set(el, el.innerHTML);
+                    }
+                });
+            });
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                // Reset highlights
+                originalContent.forEach((html, el) => {
+                    el.innerHTML = html;
+                    el.style.display = ''; // Ensure element is visible before hiding
+                });
+
+                if (searchTerm === "") {
+                     sections.forEach(section => {
+                        section.style.display = 'block';
+                        section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p').forEach(el => el.style.display = '');
+                    });
+                    return;
+                }
+
+                sections.forEach(section => {
+                    let sectionHasMatch = false;
+                    const searchableElements = section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p');
+                    
+                    searchableElements.forEach(el => {
+                        const text = el.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            sectionHasMatch = true;
+                            // Highlight term
+                            const originalHtml = originalContent.get(el);
+                            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            el.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
+                            el.style.display = '';
+
+                            // Ensure parent collapsible (if any) is open
+                            let parent = el.closest('.collapsible-content');
+                            if (parent && parent.style.display !== 'block') {
+                                parent.style.display = 'block';
+                                const button = parent.previousElementSibling;
+                                if (button && button.classList.contains('collapsible')) {
+                                    button.classList.add('active');
+                                }
+                            }
+
+                        } else {
+                            el.style.display = 'none'; 
+                        }
+                    });
+
+                    if (sectionHasMatch) {
+                        section.style.display = 'block';
+                        // Also check section title
+                        const sectionTitle = section.querySelector('h2');
+                        if (sectionTitle && sectionTitle.textContent.toLowerCase().includes(searchTerm)) {
+                             const originalHtml = sectionTitle.innerHTML; // Assuming h2 doesn't have complex children
+                             const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                             sectionTitle.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
+                        }
+
+                    } else {
+                        // If no element in section matches, check if section title itself matches
+                        const sectionTitle = section.querySelector('h2');
+                        if (sectionTitle && sectionTitle.textContent.toLowerCase().includes(searchTerm)) {
+                            section.style.display = 'block';
+                            // Highlight term in title
+                            const originalHtml = sectionTitle.innerHTML; 
+                            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            sectionTitle.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
+                            // Show all content within this section if title matches
+                            searchableElements.forEach(el => {
+                                el.innerHTML = originalContent.get(el); // reset potential highlight
+                                el.style.display = '';
+                            });
+                        } else {
+                           section.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Sidebar navigation filter
+            const navFilterInput = document.getElementById('nav-filter');
+            const navListItems = document.querySelectorAll('#nav-list li');
+
+            navFilterInput.addEventListener('input', function() {
+                const filterTerm = this.value.toLowerCase().trim();
+                navListItems.forEach(item => {
+                    const linkText = item.querySelector('a').textContent.toLowerCase();
+                    if (linkText.includes(filterTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Smooth scroll and active link for sidebar
+            const navLinks = document.querySelectorAll('#sidebar #nav-list a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Remove active class from all
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                });
+            });
+
+             // Highlight active section in sidebar on scroll
+            const sectionsForScrollSpy = document.querySelectorAll('#main-content section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sectionsForScrollSpy.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Adjust offset if you have a fixed header
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3 - 60)) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
