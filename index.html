@@ -104,11 +104,16 @@
         h3 {
             color: #555;
             margin-top: 25px;
+            font-size: 1.2em; /* Make section sub-headers more prominent */
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-left: 3px solid #f0ad4e;
         }
         
         h4 {
             color: #777;
             font-style: italic;
+            margin-top: 20px; /* Add some space above h4 */
         }
 
         ul {
@@ -138,6 +143,7 @@
         .atencao {
             border-left-color: #d9534f; /* Red for strong attention */
             background-color: #f2dede;
+            font-weight: bold; /* Make attention text bolder */
         }
 
         .competencia-item {
@@ -154,51 +160,37 @@
             font-weight: bold;
         }
         
-        /* Collapsible sections */
-        .collapsible {
+        /* Style for the now non-collapsible headers */
+        .static-header { /* Renamed from .collapsible */
             background-color: #eee;
             color: #444;
-            cursor: pointer;
-            padding: 15px;
+            padding: 12px 15px; /* Adjusted padding */
             width: 100%;
             border: none;
             text-align: left;
             outline: none;
             font-size: 1.1em;
-            margin-top: 10px;
+            margin-top: 15px;
             margin-bottom: 0;
             border-radius: 3px 3px 0 0;
+            box-sizing: border-box;
+            font-weight: bold;
         }
 
-        .collapsible:hover {
-            background-color: #ddd;
-        }
-
-        .collapsible-content {
-            padding: 0 18px;
-            display: none; /* Hidden by default */
+        .content-wrapper { /* Renamed from .collapsible-content */
+            padding: 15px 18px; /* Consistent padding */
+            display: block; /* Always visible */
             overflow: hidden;
             background-color: white;
             border: 1px solid #eee;
             border-top: none;
             border-radius: 0 0 3px 3px;
         }
-        .collapsible-content ul, .collapsible-content p {
-            margin-top: 15px;
-            margin-bottom: 15px;
+        .content-wrapper ul, .content-wrapper p {
+            margin-top: 10px; /* Reduced margin */
+            margin-bottom: 10px;
         }
 
-        .collapsible.active:after {
-            content: "\2212"; /* Minus sign */
-        }
-
-        .collapsible:not(.active):after {
-            content: '\002B'; /* Plus sign */
-            color: #777;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
 
         @media (max-width: 768px) {
             #sidebar {
@@ -283,8 +275,8 @@
             <h2>PP (área estatutária)</h2>
             <p class="atencao"><strong>Atenção:</strong> no caso de processos eletrônicos, o cadastro tanto de processos do interior quanto de Porto Alegre deverá ser feito como PP. Os processos físicos que se enquadrem nesta categoria seguem sendo diferenciados entre interior (PI) e Porto Alegre (PP).</p>
             
-            <button type="button" class="collapsible">Ordinária > Instrutória > Estatutária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Estatutária</div>
+            <div class="content-wrapper">
                 <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
                 <ul>
                     <li>Questões envolvendo prova/etapas de concurso público</li>
@@ -303,8 +295,8 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Vantagens > Instrutória > Estatutária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Vantagens > Instrutória > Estatutária</div>
+            <div class="content-wrapper">
                 <h4>SERVIDOR ATIVO:</h4>
                 <p class="atencao">(Atenção! Ativo é PP e inativo é PPREV)</p>
                 <ul>
@@ -354,8 +346,8 @@
             <h2>PPREV (áreas: previdenciária e IPÊ-Saúde)</h2>
             <p class="atencao"><strong>Atenção:</strong> no caso de processos eletrônicos, o cadastro tanto de processos do interior quanto de Porto Alegre, das áreas previdenciária e ipê-saúde, deverá ser feito como PPREV. Os processos físicos que se enquadrem nestas categorias seguem sendo diferenciados entre interior (PI) e Porto Alegre (PPREV).</p>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > Previdenciária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Previdenciária</div>
+            <div class="content-wrapper">
                 <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
                 <h4>EXCLUSIVO DA PPREV:</h4>
                 <ul>
@@ -406,15 +398,15 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Alvará > Instrutória > Previdenciária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Alvará > Instrutória > Previdenciária</div>
+            <div class="content-wrapper">
                  <ul>
                     <li>Alvará de herdeiros ou pensionistas para levantamento de valor deixado por servidor falecido.</li>
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > IPÊ-Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > IPÊ-Saúde</div>
+            <div class="content-wrapper">
                 <p class="obs">(Em todos os casos a parte tem que ser o ipê, com ou sem o Estado junto)</p>
                 <ul>
                     <li>Convênios/Contratos Administrativos. Carência/Descredenciamento. CONTRA O IPÊ</li>
@@ -428,8 +420,8 @@
         
         <section id="pdpe-pi-dominio-publico">
             <h2>PDPE/PI (área domínio público)</h2>
-             <button type="button" class="collapsible">Ordinária > Instrutória > Domínio Público</button>
-            <div class="collapsible-content">
+             <div class="static-header">Ordinária > Instrutória > Domínio Público</div>
+            <div class="content-wrapper">
                 <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
                 <ul>
                     <li>Matéria ambiental</li>
@@ -465,8 +457,8 @@
                     <li>PIX SOS (pode ser ordinária ou indenizatória, dependendo dos pedidos)</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">Indenizatória > Instrutória > Domínio Público</button>
-            <div class="collapsible-content">
+            <div class="static-header">Indenizatória > Instrutória > Domínio Público</div>
+            <div class="content-wrapper">
                  <p class="obs">(A natureza “indenizatória” SÓ pode ser utilizada para a área domínio público)</p>
                  <ul>
                     <li>Indenização/reparação por danos morais e materiais. Quando quer só indenização, mesmo que seja servidor público.</li>
@@ -474,8 +466,8 @@
                     <li>GDAP: indenização devido ao parcelamento da GDAP na gratificação natalina.</li>
                  </ul>
             </div>
-            <button type="button" class="collapsible">Usucapião > Instrutória > Domínio Público</button>
-            <div class="collapsible-content">
+            <div class="static-header">Usucapião > Instrutória > Domínio Público</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Estado é interessado e tem que adicionar a tese 2329</li>
                     <li>Pode ser tanto bem imóvel quanto móvel</li>
@@ -483,8 +475,8 @@
             </div>
             
             <h3>PDPE/PI (demais casos)</h3>
-            <button type="button" class="collapsible">Execução de Título Extrajudicial > Execução por Quantia Certa > Arrecadação Não Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Execução de Título Extrajudicial > Execução por Quantia Certa > Arrecadação Não Tributária</div>
+            <div class="content-wrapper">
                 <p class="obs">(Estado ou entidade representada é o Autor/Credor/Exequente)</p>
                 <ul>
                     <li>PROCRED *FUNAMEP *MICROCRÉDITO *FEAPER *FUNTERRA *RS RURAL
@@ -499,13 +491,13 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Anulação e Revisão de Ato Administrativo > Instrutória > Trânsito</button>
-            <div class="collapsible-content">
+            <div class="static-header">Anulação e Revisão de Ato Administrativo > Instrutória > Trânsito</div>
+            <div class="content-wrapper">
                 <ul><li>Anulação de infrações, CNH suspensa</li></ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > Trânsito</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Trânsito</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Regularização de veículo junto ao Detran</li>
                     <li>Remoção</li>
@@ -518,14 +510,14 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</button>
-            <div class="collapsible-content">
+            <div class="static-header">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</div>
+            <div class="content-wrapper">
                 <ul><li>Cobrança de cotas condominiais (na petição a parte é condomínio ou há menção de imóvel ou há pedido de que o Estado pague algum débito condominial).</li></ul>
                 <p class="obs"><strong>Obs.:</strong> Pode se tratar de ação de cobrança também. Nestes casos, o cadastro fica como: Ordinária > instrutória > Domínio Público.</p>
             </div>
 
-            <button type="button" class="collapsible">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Arrecadação Não Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Arrecadação Não Tributária</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Cumprimento de sentença da PGE, cujo processo de origem seja qualquer matéria, <strong class="atencao">exceto</strong> defesa/arrecadação tributária (Estado credor/exequente)
                         <ul>
@@ -536,8 +528,8 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Execução fiscal > Execução > Arrecadação Não Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Execução fiscal > Execução > Arrecadação Não Tributária</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Processo definido claramente como execução fiscal, o Estado é o Exequente. Exemplos de CDAs de natureza não tributária: Multa CISPOA DEC 39688/99; Multas penais; Multas diversas; Outros não tributários; Devolução restituição pessoal SEFAZ; Multa FEPAM; Multa Vig. Sanitária; Multa PROCOM; Multa FEASP Vet.; Honorários FADEP; Multa FEBRE AFTOSA SECOFA; Multas portuárias.
                         <ul><li>Incluir tese de valor</li></ul>
@@ -545,17 +537,16 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Execução Hipotecária > Execução > Arrecadação Não Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Execução Hipotecária > Execução > Arrecadação Não Tributária</div>
+            <div class="content-wrapper">
                  <ul><li>Processos em que o IPERGS é o exequente.</li></ul>
             </div>
         </section>
         
-        <!-- Add other sections similarly -->
         <section id="psaude">
             <h2>PSAUDE (área saúde)</h2>
-            <button type="button" class="collapsible">Prestação de Serviços de Saúde > Instrutória > Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Prestação de Serviços de Saúde > Instrutória > Saúde</div>
+            <div class="content-wrapper">
                 <p class="obs">(Sempre cuidar para deixar o “paciente” como parte principal no cadastro)</p>
                 <ul>
                     <li>Pedido de medicamentos, internação compulsória, tratamento/ procedimentos médicos, fraldas, medida de proteção ao idoso, etc.</li>
@@ -567,8 +558,8 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > IPÊ-Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > IPÊ-Saúde</div>
+            <div class="content-wrapper">
                  <p class="obs">(Em todos os casos a parte tem que ser o ipê, com ou sem o Estado junto)</p>
                  <ul>
                     <li>Para os mesmos casos listados acima, de prestação de saúde, porém com o IPÊ-SAÚDE como parte também.</li>
@@ -576,16 +567,16 @@
                  </ul>
             </div>
             
-            <button type="button" class="collapsible">Ordinária > Instrutória > Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Saúde</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>ESTADO AUTOR. Pode aparecer como ação regressiva, ação ordinária, ação de cobrança, etc. O Estado cobra valores de prestação de saúde que pagou erroneamente no lugar de Município, União ou alguma Entidade (Hospital, Clínica, etc.)</li>
                     <li>ESTADO AUTOR. Cobrança de valor liberado em outro processo e sem a devida prestação de contas por parte do “paciente”. É ação de cobrança/ordinária mesmo e não cumprimento de sentença.</li>
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Saúde</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Pedido de cumprimento de sentença ou execução provisória para prestação de serviço de saúde ou medicamentos. (NÃO adicionar tese)
                         <ul><li>Vincular processo de origem</li></ul>
@@ -594,8 +585,8 @@
                 <p class="obs">OBS: nas ações de cumprimento de saúde, somente será cumprimento contra a fazenda pública se for execução de honorários (neste caso, incluir tese de valor e encaminhar para PPJ).</p>
             </div>
             
-            <button type="button" class="collapsible">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Ipê-Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de sentença > Cumprimento de Obrigação de fazer e não fazer > Execução > Ipê-Saúde</div>
+            <div class="content-wrapper">
                  <ul>
                     <li>Pedido de cumprimento de sentença ou execução provisória para prestação de serviço de saúde ou medicamentos. (NÃO adicionar tese)
                         <ul><li>Vincular processo de origem</li></ul>
@@ -603,8 +594,8 @@
                  </ul>
             </div>
 
-            <button type="button" class="collapsible">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprim. Definitivo obrigação pagar quantia certa (Art523CPC) > Execução > Saúde</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Cumprimento de honorários contra Município (Estado credor) referente à ação de saúde
                         <ul>
@@ -618,8 +609,8 @@
 
         <section id="pf-pi-tributaria">
             <h2>PF/PI (áreas: Arrecadação Tributária ou Defesa Tributária)</h2>
-            <button type="button" class="collapsible">Execução fiscal > Execução > Arrecadação Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Execução fiscal > Execução > Arrecadação Tributária</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Processo definido claramente como execução fiscal, <strong class="competencia-item">Estado é exequente</strong>
                         <ul><li>Incluir tese de valor</li></ul>
@@ -627,26 +618,26 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > Arrecadação Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Arrecadação Tributária</div>
+            <div class="content-wrapper">
                  <ul>
                     <li class="competencia-item">Ação Penal - Crimes contra a Ordem Tributária (petição inicial ajuizada pelo MP) - se for algo mais genérico de ação penal/criminal, é domínio público</li>
                  </ul>
             </div>
 
-            <button type="button" class="collapsible">Declaratória de Grupo Econômico > Instrutória > Arrecadação Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Declaratória de Grupo Econômico > Instrutória > Arrecadação Tributária</div>
+            <div class="content-wrapper">
                 <p>Ação específica que menciona grupo econômico e grandes devedores. O Estado é AUTOR. A competência, caso não puxe automaticamente, é de quem fez a petição inicial.</p>
             </div>
 
-            <button type="button" class="collapsible">Incidente de Classificação de Crédito Público > Instrutória > Arrecadação Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Incidente de Classificação de Crédito Público > Instrutória > Arrecadação Tributária</div>
+            <div class="content-wrapper">
                 <p>Dentro da Classe Incidentes Processuais. É uma ação bem específica, às vezes começa mencionando Falência ou Recuperação Judicial, mas no despacho final é possível confirmar que se trata desse incidente processual.</p>
                 <ul><li>Vincular processo de origem (sempre é uma falência ou recuperação judicial)</li></ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > Defesa Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Defesa Tributária</div>
+            <div class="content-wrapper">
                 <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc)</p>
                 <ul>
                     <li>Cobrança indevida de tributos (ICMS, IRPF, ITCD, etc)</li>
@@ -666,14 +657,14 @@
                 </ul>
             </div>
             
-            <button type="button" class="collapsible">Alvará > Instrutória > Defesa Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Alvará > Instrutória > Defesa Tributária</div>
+            <div class="content-wrapper">
                 <p>Quando há pedido de levantamento de valores em decorrência de inventário de pessoa falecida que não era servidor público... A intimação é referente a algum tributo.</p>
                 <p class="obs">OBS: se for a pessoa que faleceu era servidora pública, a competência é da PPREV.</p>
             </div>
 
-            <button type="button" class="collapsible">Cumprimento de sentença contra a Fazenda Pública (estado no polo passivo)</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de sentença contra a Fazenda Pública (estado no polo passivo)</div>
+            <div class="content-wrapper">
                 <p>Quando há pedido de execução/cumprimento de sentença sobre o valor de ICMS, vai para PF (tanto área arrecadação tributária quanto defesa tributária)</p>
                 <ul>
                     <li>Vincular processo de origem</li>
@@ -682,8 +673,8 @@
                 <p class="obs">OBS: nos demais casos de execução ou cumprimento de sentença, mesmo a origem sendo da PF, o processo de execução/cumprimento vai para a PPJ/SEC-CS (no caso de Porto Alegre – origem da PI continua com a PI).</p>
             </div>
             
-            <button type="button" class="collapsible">Cumprimento de sentença definitivo de pagar quantia certa > Execução > Arrecadação Tributária (estado no polo ativo)</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de sentença definitivo de pagar quantia certa > Execução > Arrecadação Tributária (estado no polo ativo)</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Cumprimento de sentença da PGE, cujo processo de origem seja defesa tributária ou arrecadação tributária (Estado credor/exequente)
                         <ul>
@@ -709,13 +700,13 @@
 
         <section id="pdpa-pi-disciplinar">
             <h2>PDPA/PI (área administrativo-disciplinar)</h2>
-            <button type="button" class="collapsible">Anulação e Revisão de Ato Administrativo > Instrutória > Administrativo-disciplinar</button>
-            <div class="collapsible-content">
+            <div class="static-header">Anulação e Revisão de Ato Administrativo > Instrutória > Administrativo-disciplinar</div>
+            <div class="content-wrapper">
                 <ul><li>Anulação de PAD, Sindicância ou punição resultante do PAD</li></ul>
             </div>
 
-            <button type="button" class="collapsible">Ordinária > Instrutória > Probidade Administrativa</button>
-            <div class="collapsible-content">
+            <div class="static-header">Ordinária > Instrutória > Probidade Administrativa</div>
+            <div class="content-wrapper">
                 <p class="obs">(Se tiver natureza mais específica, utilizá-la. Exemplos: anulatória, anulação e revisão de ato administrativo, mandado de segurança, ação civil pública, etc. Neste caso o mais comum é Ação Civil Pública de Interesses Difusos e Coletivos)</p>
                 <ul><li>Questões envolvendo improbidade administrativa e ANPC (Acordo de Não Persecução Cível)</li></ul>
             </div>
@@ -726,8 +717,8 @@
             <p class="atencao"><strong>Atenção:</strong> processos do interior com as áreas estatutária, previdenciária e trânsito são de competência da PPJ. Os demais, seguem regras específicas. Ipê-saúde pode ser PSAUDE ou PPJ, saúde pode ser PSAUDE ou PPJ, defesa tributária pode ser PF ou PPJ... além das demais áreas, que podem ser PI (interior) ou PPJ (Porto Alegre).</p>
             <p class="atencao"><strong>Atenção de novo:</strong> cumprimento de sentença, neste caso, será sempre contra a fazenda pública. Se for cumprimento a favor da fazenda pública ou de obrigação de fazer/não fazer, a competência vai ser de outra especializada.</p>
 
-            <button type="button" class="collapsible">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > "Área do processo de origem"</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > "Área do processo de origem"</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Ações de execução ou cumprimento de sentença para cobrança de valores contra o Estado.
                         <ul>
@@ -739,13 +730,13 @@
                 </ul>
             </div>
             
-            <button type="button" class="collapsible">Cumprimento de sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Ipê-Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Ipê-Saúde</div>
+            <div class="content-wrapper">
                 <ul><li class="competencia-item">Diferente do cumprimento de saúde (sem ipê), se for cumprimento de sentença de valores contra o ipê-saúde se encaixa nesse caso aqui e não como PSAUDE.</li></ul>
             </div>
 
-            <button type="button" class="collapsible">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Domínio Público</button>
-            <div class="collapsible-content">
+            <div class="static-header">Cumprimento de Sentença > Cumprim. De sentença contra Fazenda Pública (Art. 534 CPC) > Execução > Domínio Público</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Ação de execução ou cumprimento de sentença de honorários de defensor dativo (pode aparecer também como “execução de título judicial").
                         <ul><li>Incluir tese de valor e tese 1133.</li></ul>
@@ -754,8 +745,8 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</button>
-            <div class="collapsible-content">
+            <div class="static-header">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Domínio Público</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Ação de execução de título extrajudicial de honorários de defensor dativo/curador especial
                         <ul><li>Incluir tese de valor e tese 1133.</li></ul>
@@ -766,8 +757,8 @@
                 </ul>
             </div>
 
-            <button type="button" class="collapsible">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Defesa Tributária</button>
-            <div class="collapsible-content">
+            <div class="static-header">Processo de Execução de Título Extrajudicial > Execução contra a Fazenda Pública > Execução > Defesa Tributária</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Processos de Execução de Títulos Extrajudiciais referentes a IPTU e taxa de lixo.
                         <ul><li>Incluir tese de valor</li></ul>
@@ -775,13 +766,13 @@
                 </ul>
             </div>
             
-            <button type="button" class="collapsible">Processo de Conhecimento > Arbitramento de Honorários > Instrutória > Área conforme a origem</button>
-            <div class="collapsible-content">
+            <div class="static-header">Processo de Conhecimento > Arbitramento de Honorários > Instrutória > Área conforme a origem</div>
+            <div class="content-wrapper">
                 <ul><li>É uma ação bem específica de arbitramento de honorários. Sempre tem um processo a ser vinculado e a área deve ser copiada deste processo. Lembrar de vincular o processo de origem.</li></ul>
             </div>
 
-            <button type="button" class="collapsible">Execução fiscal > Execução > Defesa Tributária (ou Domínio Público)</button>
-            <div class="collapsible-content">
+            <div class="static-header">Execução fiscal > Execução > Defesa Tributária (ou Domínio Público)</div>
+            <div class="content-wrapper">
                 <ul><li>Execução fiscal na qual o <strong class="competencia-item">Estado</strong> conste no <strong class="competencia-item">polo passivo</strong> (geralmente execução fiscal movida pelo município).</li></ul>
                 <p>No caso de Porto Alegre, execução fiscal da 8ª Vara é sempre PPJ (geralmente é um processo do município contra o estado)</p>
                 <ul><li>Incluir tese de valor</li></ul>
@@ -789,8 +780,8 @@
                 <p class="obs">OBS: quando o Estado é terceiro interessado geralmente o cadastro é este aqui também.</p>
             </div>
             
-            <button type="button" class="collapsible">Incidentes Processuais > Outros incidentes > Instrutória...</button>
-            <div class="collapsible-content">
+            <div class="static-header">Incidentes Processuais > Outros incidentes > Instrutória...</div>
+            <div class="content-wrapper">
                  <ul>
                     <li>Para processos administrativos do TJRS com cobrança de custas processuais
                         <ul>
@@ -809,22 +800,22 @@
 
         <section id="competencia-procuradorias">
             <h2>Competência das Procuradorias:</h2>
-            <button type="button" class="collapsible">PP – Procuradoria de Pessoal</button>
-            <div class="collapsible-content">
+            <div class="static-header">PP – Procuradoria de Pessoal</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Área Estatutária de processos eletrônicos de Porto Alegre e do interior.</li>
                     <li>Atuações da PP vão para PP/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">PPREV – Procuradoria Previdenciária</button>
-            <div class="collapsible-content">
+            <div class="static-header">PPREV – Procuradoria Previdenciária</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Áreas Previdenciária e Ipê-Saúde de processos eletrônicos de Porto Alegre e do interior.</li>
                     <li>Atuações da PPREV vão para PPREV/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
                 </ul>
             </div>
-             <button type="button" class="collapsible">PDPE – Procuradoria de Domínio Público Estadual</button>
-            <div class="collapsible-content">
+             <div class="static-header">PDPE – Procuradoria de Domínio Público Estadual</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Áreas Arrecadação Não Tributária e Domínio Público de processos de Porto Alegre.</li>
                     <li class="competencia-item">Área Trânsito de processos eletrônicos tanto do interior quanto de Porto Alegre.</li>
@@ -832,45 +823,45 @@
                     <li class="atencao"><strong>Atenção!</strong> Atuações do interior de Arrecadação Não Tributária vão para a Secretaria da 06ª PR, de Domínio Público vão para a PI-SEC e de Trânsito vão para a PDPE-SEC.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">PSAUDE – Procuradoria de Saúde</button>
-            <div class="collapsible-content">
+            <div class="static-header">PSAUDE – Procuradoria de Saúde</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Área Saúde e Ipê-Saúde de processos eletrônicos tanto do interior quanto de Porto Alegre.</li>
                     <li>Atuações da PSAUDE vão para PSAUDE/SEC/Secretaria.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">PF – Procuradoria Fiscal</button>
-            <div class="collapsible-content">
+            <div class="static-header">PF – Procuradoria Fiscal</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Áreas Arrecadação Tributária e Defesa Tributária de processos de Porto Alegre.</li>
                     <li>Neste caso, qualquer processo do interior, físico ou eletrônico, é de competência da PI.</li>
                     <li>Atuações da PF vão para PF/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">PDPA – Procuradoria Disciplinar e de Probidade Administrativa</button>
-            <div class="collapsible-content">
+            <div class="static-header">PDPA – Procuradoria Disciplinar e de Probidade Administrativa</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Áreas Administrativo-Disciplinar e Probidade Administrativa de processos de Porto Alegre.</li>
                     <li>Neste caso, qualquer processo do interior, físico ou eletrônico, é de competência da PI.</li>
                     <li>Atuações da PDPA vão para PDPA/SEC/Secretaria e da PI para PI/SEC/Secretaria.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">GAB/AJL – Gabinete/Assessoria Jurídica e Legislativa</button>
-            <div class="collapsible-content">
+            <div class="static-header">GAB/AJL – Gabinete/Assessoria Jurídica e Legislativa</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Para ações que sejam mais relevantes. Ações do momento, como por exemplo, do COVID, ou de alguma questão que esteja em noticiário. Geralmente são ações coletivas, como Ação Popular, Ação Civil Pública, Mandado de Segurança, mas nem sempre (não dá para se guiar só por isso). Processos de Procuradores da PGE sempre vão para GAB/AJL.</li>
                     <li>Atuações vão para GAB/AJL/Assessoria Jurídica e Legislativa.</li>
                 </ul>
             </div>
-            <button type="button" class="collapsible">GAB/CAJAPDI – Coordenação-Geral das Assessorias Jurídicas da Administração Pública Direta e Indireta</button>
-            <div class="collapsible-content">
+            <div class="static-header">GAB/CAJAPDI – Coordenação-Geral das Assessorias Jurídicas da Administração Pública Direta e Indireta</div>
+            <div class="content-wrapper">
                  <ul>
                     <li>Somente encaminhamos atuações diretamente ao grupo da CAJAPDI nos casos de ADINs.</li>
                     <li>Atuações vão para GAB/CAJAPDI/Procuradores.</li>
                  </ul>
             </div>
-            <button type="button" class="collapsible">PPJ – Procuradoria de Passivos Judiciais</button>
-            <div class="collapsible-content">
+            <div class="static-header">PPJ – Procuradoria de Passivos Judiciais</div>
+            <div class="content-wrapper">
                 <ul>
                     <li>Para ações de cumprimento de sentença contra o Estado, RPV e precatórios de Porto Alegre.</li>
                     <li>Para processos eletrônicos do interior de cumprimento de sentença contra o Estado das seguintes áreas: estatutária, previdenciária, saúde, ipê-saúde e trânsito.</li>
@@ -883,8 +874,8 @@
                     </li>
                 </ul>
             </div>
-             <button type="button" class="collapsible">PTRAB – Procuradoria Trabalhista</button>
-            <div class="collapsible-content">
+             <div class="static-header">PTRAB – Procuradoria Trabalhista</div>
+            <div class="content-wrapper">
                 <ul>
                     <li class="competencia-item">Área Trabalhista de processos do interior e de Porto Alegre. Apenas para ações trabalhistas. Nenhum processo cível deve ser cadastrado com essa área nem ser encaminhado à PTRAB.</li>
                     <li>Atuações vão para PTRAB/SEC/Secretaria.</li>
@@ -1136,20 +1127,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Collapsible sections
-            const collapsibles = document.getElementsByClassName("collapsible");
-            for (let i = 0; i < collapsibles.length; i++) {
-                collapsibles[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    const content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                    }
-                });
-            }
-
             // Search functionality
             const searchInput = document.getElementById('search-input');
             const sections = document.querySelectorAll('#main-content section');
@@ -1157,7 +1134,8 @@
 
             // Store original content of list items and paragraphs for reset
             sections.forEach(section => {
-                section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p').forEach(el => {
+                // Include static-header and content-wrapper elements for search
+                section.querySelectorAll('li, p, h3, h4, .static-header, .content-wrapper > p, .content-wrapper > ul > li, .content-wrapper > div > ul > li, .content-wrapper > div > p').forEach(el => {
                     if (!originalContent.has(el)) {
                          originalContent.set(el, el.innerHTML);
                     }
@@ -1167,76 +1145,82 @@
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase().trim();
                 
-                // Reset highlights
+                // Reset highlights and visibility
                 originalContent.forEach((html, el) => {
                     el.innerHTML = html;
-                    el.style.display = ''; // Ensure element is visible before hiding
+                    el.style.display = ''; 
                 });
+
+                 sections.forEach(section => {
+                    section.style.display = 'block'; // Ensure sections are visible by default for search
+                 });
+
 
                 if (searchTerm === "") {
                      sections.forEach(section => {
                         section.style.display = 'block';
-                        section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p').forEach(el => el.style.display = '');
+                        // Ensure all elements within sections are visible
+                        section.querySelectorAll('li, p, h3, h4, .static-header, .content-wrapper > p, .content-wrapper > ul > li, .content-wrapper > div > ul > li, .content-wrapper > div > p').forEach(el => el.style.display = '');
                     });
                     return;
                 }
 
                 sections.forEach(section => {
                     let sectionHasMatch = false;
-                    const searchableElements = section.querySelectorAll('li, p, h3, h4, .collapsible-content > p, .collapsible-content > ul > li, .collapsible-content > div > ul > li, .collapsible-content > div > p');
+                    const searchableElements = section.querySelectorAll('li, p, h3, h4, .static-header, .content-wrapper > p, .content-wrapper > ul > li, .content-wrapper > div > ul > li, .content-wrapper > div > p');
                     
                     searchableElements.forEach(el => {
                         const text = el.textContent.toLowerCase();
                         if (text.includes(searchTerm)) {
                             sectionHasMatch = true;
-                            // Highlight term
                             const originalHtml = originalContent.get(el);
                             const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                            el.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
-                            el.style.display = '';
-
-                            // Ensure parent collapsible (if any) is open
-                            let parent = el.closest('.collapsible-content');
-                            if (parent && parent.style.display !== 'block') {
-                                parent.style.display = 'block';
-                                const button = parent.previousElementSibling;
-                                if (button && button.classList.contains('collapsible')) {
-                                    button.classList.add('active');
-                                }
+                            // Make sure originalHtml is a string
+                            if (typeof originalHtml === 'string') {
+                                el.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
                             }
-
+                            el.style.display = '';
                         } else {
                             el.style.display = 'none'; 
                         }
                     });
 
+                    const sectionTitleElement = section.querySelector('h2');
+                    let titleMatches = false;
+                    if (sectionTitleElement && sectionTitleElement.textContent.toLowerCase().includes(searchTerm)) {
+                        titleMatches = true;
+                        sectionHasMatch = true; // If title matches, section should be shown
+                        const originalHtml = sectionTitleElement.innerHTML; 
+                        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                        if (typeof originalHtml === 'string') {
+                           sectionTitleElement.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
+                        }
+                    }
+
+
                     if (sectionHasMatch) {
                         section.style.display = 'block';
-                        // Also check section title
-                        const sectionTitle = section.querySelector('h2');
-                        if (sectionTitle && sectionTitle.textContent.toLowerCase().includes(searchTerm)) {
-                             const originalHtml = sectionTitle.innerHTML; // Assuming h2 doesn't have complex children
-                             const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                             sectionTitle.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
-                        }
-
-                    } else {
-                        // If no element in section matches, check if section title itself matches
-                        const sectionTitle = section.querySelector('h2');
-                        if (sectionTitle && sectionTitle.textContent.toLowerCase().includes(searchTerm)) {
-                            section.style.display = 'block';
-                            // Highlight term in title
-                            const originalHtml = sectionTitle.innerHTML; 
-                            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                            sectionTitle.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
-                            // Show all content within this section if title matches
-                            searchableElements.forEach(el => {
-                                el.innerHTML = originalContent.get(el); // reset potential highlight
-                                el.style.display = '';
+                        // If the title matched OR any element matched, make sure all elements that weren't hidden by their own non-match are visible
+                        if(titleMatches){
+                             searchableElements.forEach(el => {
+                                // If an element was hidden because IT didn't match, but the TITLE did, show it (without highlight unless it also matched)
+                                if(el.style.display === 'none'){
+                                     const text = el.textContent.toLowerCase();
+                                     if (text.includes(searchTerm)) {
+                                        const originalHtml = originalContent.get(el);
+                                        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                                        if (typeof originalHtml === 'string') {
+                                            el.innerHTML = originalHtml.replace(regex, '<span class="highlight-search">$1</span>');
+                                        }
+                                     } else {
+                                        el.innerHTML = originalContent.get(el); // Reset to original if no match
+                                     }
+                                    el.style.display = '';
+                                }
                             });
-                        } else {
-                           section.style.display = 'none';
                         }
+                    } else {
+                       section.style.display = 'none';
                     }
                 });
             });
@@ -1262,25 +1246,24 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    // Remove active class from all
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                     navLinks.forEach(l => l.classList.remove('active'));
-                    // Add active class to clicked link
                     this.classList.add('active');
                 });
             });
 
-             // Highlight active section in sidebar on scroll
             const sectionsForScrollSpy = document.querySelectorAll('#main-content section');
             window.addEventListener('scroll', () => {
                 let current = '';
                 sectionsForScrollSpy.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    // Adjust offset if you have a fixed header
-                    if (pageYOffset >= (sectionTop - sectionHeight / 3 - 60)) { 
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3 - 70)) { // 70px offset for header
                         current = section.getAttribute('id');
                     }
                 });
